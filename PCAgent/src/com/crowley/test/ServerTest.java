@@ -1,11 +1,12 @@
 package com.crowley.test;
 
-import com.crowley.controller.LoginService;
 
 public class ServerTest {
 	
 	public static void main(String[] args) {
-		new LoginService().start();
+		//new LoginService().start();
+		String str = "a2";
+		System.out.print(str.split("\\|")[0]);
 	}
 
 }

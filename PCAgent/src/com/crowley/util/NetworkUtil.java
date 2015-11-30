@@ -19,9 +19,7 @@ public class NetworkUtil {
 			String line = null;
 			while((line = br.readLine()) != null) {
 				if(line.contains(" 0.0.0.0 ") || line.contains(" default ")) {
-					System.out.println(line.trim());
 					ip = (line.trim().split("\\s+"))[3];
-					System.out.println(ip);
 					break;
 				}
 			}

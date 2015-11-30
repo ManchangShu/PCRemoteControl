@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">PCController</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="click_area">ClickArea</string>
+    <string name="move_area">MoveArea</string>
+    <string name="input_ip">Input IP Address:</string>
+    <string name="login">Login</string>
 
 </resources>
