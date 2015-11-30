@@ -16,6 +16,10 @@ $RECYCLE.BIN/
 *.msp
 *.caches
 *.class
+*.dex
+*.apk
+*.cache
+*.ap_
 
 # Windows shortcuts
 *.lnk
