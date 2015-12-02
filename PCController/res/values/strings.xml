@@ -2,9 +2,7 @@
 <resources>
 
     <string name="app_name">PCController</string>
-    <string name="click_area">ClickArea</string>
-    <string name="move_area">MoveArea</string>
-    <string name="input_ip">Input IP Address:</string>
-    <string name="login">Login</string>
-
+    <string name="or">或</string>
+    <string name="ip_hint">在这里输入IP</string>
+    
 </resources>

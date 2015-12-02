@@ -23,10 +23,16 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int icon=0x7f020001;
+        public static final int login_background=0x7f020002;
+        public static final int login_login=0x7f020003;
+        public static final int login_login_press=0x7f020004;
+        public static final int login_scan=0x7f020005;
+        public static final int long_input_background=0x7f020006;
     }
     public static final class id {
+        public static final int image_login=0x7f080002;
         public static final int ip_address=0x7f080001;
-        public static final int login=0x7f080002;
         public static final int move_area=0x7f080000;
     }
     public static final class layout {
@@ -38,10 +44,8 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
-        public static final int click_area=0x7f050001;
-        public static final int input_ip=0x7f050003;
-        public static final int login=0x7f050004;
-        public static final int move_area=0x7f050002;
+        public static final int ip_hint=0x7f050002;
+        public static final int or=0x7f050001;
     }
     public static final class style {
         /** 
@@ -67,7 +71,6 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
     }
