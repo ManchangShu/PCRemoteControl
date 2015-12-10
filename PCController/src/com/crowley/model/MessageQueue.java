@@ -4,30 +4,36 @@ import java.util.LinkedList;
 
 public class MessageQueue {
 	
-	private LinkedList<String> messageQueue = new LinkedList<String>();
+	private static LinkedList<String> messageQueue = new LinkedList<String>();
+	private static Object lock = new Object();
 	
-	
-	public synchronized String getMessage() {
-		//System.out.println("get message ...");
+	public static String getMessage() {
 		String message = null;
-		while(messageQueue.isEmpty()) {
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		synchronized (lock) {
+			
+			while(messageQueue.isEmpty()) {
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
+			message = messageQueue.pollFirst();
 		}
-		message = messageQueue.pollFirst();
 		return message;
 	}
 	
-	public synchronized void setMessage(String message) {
-		//System.out.println("set message ...");
-		messageQueue.offerLast(message);
-		this.notifyAll();
+	public static void pushMessage(String message) {
+		synchronized (lock) {
+			messageQueue.offerLast(message);
+			lock.notifyAll();
+		}
+		
 	}
 	
-	public synchronized void clearQueue() {
-		messageQueue.clear();
+	public static void clearQueue() {
+		synchronized (lock) {
+			messageQueue.clear();
+		}
 	}
 }

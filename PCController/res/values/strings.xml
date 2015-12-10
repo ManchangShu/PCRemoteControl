@@ -4,5 +4,9 @@
     <string name="app_name">PCController</string>
     <string name="or">或</string>
     <string name="ip_hint">在这里输入IP</string>
+    <string name="ip_wrong_hint">请输入正确的IP地址！</string>
+    <string name="remember_ip">记住输入的IP地址</string>
+    <string name="socket_timeout">连接服务器失败！</string>
+    <string name="socket_login_successful">登陆成功！</string>
     
 </resources>

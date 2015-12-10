@@ -9,14 +9,12 @@ import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
 import com.crowley.model.Constants;
-import com.crowley.model.LoginService;
+import com.crowley.model.NetworkModule;
 import com.crowley.model.MessageQueue;
 
 
 
-//TODO 目前版本主线程会阻塞，UI体验极差
 public class MainActivity extends Activity {
-	public static MessageQueue messageQueue = new MessageQueue();
 	TextView moveArea;
 	PointF preCoordinate = new PointF();
 	PointF clickPressCoordinate = new PointF();
@@ -29,21 +27,21 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		moveArea = (TextView) findViewById(R.id.move_area);;
 		moveArea.setOnTouchListener(new MyOnTouchListener());
-		new LoginService().start();
 		
 	}
 	
 	
 	@Override
 	protected void onPause() {
-		messageQueue.clearQueue();
+		MessageQueue.clearQueue();
 		super.onPause();
 	}
 
 
 	@Override
 	protected void onDestroy() {
-		//TODO
+		NetworkModule.stopService();
+		MessageQueue.pushMessage("" + Constants.MESSAGE_TYPE_APP_EXIT + "\n");
 		super.onDestroy();
 	}
 
@@ -64,7 +62,7 @@ public class MainActivity extends Activity {
 				int yOffset = (int) (curYCoordinate - preCoordinate.y);
 				//System.out.println(event.getX() + ", " + event.getY());
 				MainActivity.this.moveArea.append(xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
-				messageQueue.setMessage(Constants.MESSAGE_TYPE_MOUSE_MOVE + Constants.MESSAGE_SEPARATOR + xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
+				MessageQueue.pushMessage(Constants.MESSAGE_TYPE_MOUSE_MOVE + Constants.MESSAGE_SEPARATOR + xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
 				preCoordinate.x = event.getX();
 				preCoordinate.y = event.getY();
 				break;
@@ -72,13 +70,13 @@ public class MainActivity extends Activity {
 				clickDuration = System.currentTimeMillis() - clickPressTime;
 				MainActivity.this.moveArea.append("click duration:" + clickDuration + "ms" + "\n");
 				if(clickDuration < Constants.MAX_LEFT_CLICK_TIME) {
-					messageQueue.setMessage("" + Constants.MESSAGE_TYPE_MOUSE_LEFT_CLICK);
+					MessageQueue.pushMessage("" + Constants.MESSAGE_TYPE_MOUSE_LEFT_CLICK);
 				}
 				if(clickDuration > Constants.MIN_RIGHT_CLICK_TIME 
 						&& clickDuration < Constants.MAX_RIGHT_CLICK_TIME
 						&& calcDistance(clickPressCoordinate , new PointF(event.getX(), event.getY())) < Constants.MAX_RIGHT_CLICK_OFFSET) {
 					System.out.println("dis:" +  calcDistance(preCoordinate, new PointF(event.getX(), event.getY())));
-					messageQueue.setMessage("" + Constants.MESSAGE_TYPE_MOUSE_RIGHT_CLICK);
+					MessageQueue.pushMessage("" + Constants.MESSAGE_TYPE_MOUSE_RIGHT_CLICK);
 				}
 				
 				preCoordinate.x = 0;

@@ -26,6 +26,11 @@ public class MessageHandler {
 		case Constants.MESSAGE_TYPE_MOUSE_RIGHT_CLICK:
 			screenUtil.rightButtonClick();
 			break;
+		case Constants.MESSAGE_TYPE_APP_EXIT:
+			System.out.println("Android client quit.");
+			//TODO
+			break;
+			
 		default:
 			break;
 		}
