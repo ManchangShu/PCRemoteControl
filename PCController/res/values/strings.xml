@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PCController</string>
+    <string name="app_name">iMove</string>
     <string name="or">或</string>
     <string name="ip_hint">在这里输入IP</string>
     <string name="ip_wrong_hint">请输入正确的IP地址！</string>

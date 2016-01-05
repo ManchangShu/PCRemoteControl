@@ -2,6 +2,7 @@
 Thumbs.db
 ehthumbs.db
 .metadata/
+.settings/
 
 # Folder config file
 Desktop.ini
@@ -20,6 +21,7 @@ $RECYCLE.BIN/
 *.apk
 *.cache
 *.ap_
+*.log
 
 # Windows shortcuts
 *.lnk

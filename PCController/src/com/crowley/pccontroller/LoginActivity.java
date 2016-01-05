@@ -7,9 +7,11 @@ import com.crowley.model.NetworkModule;
 import com.crowley.model.Persistence;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,6 +57,13 @@ public class LoginActivity extends Activity {
 		
 		ivLogin.setEnabled(true);
 		
+	}
+	
+	public void hideSoftKeyboard(View view) {
+		InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(manager.isActive()) {
+			manager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+		}
 	}
 	
 	//check the correctness of IP address
