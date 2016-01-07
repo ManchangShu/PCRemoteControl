@@ -1,19 +1,13 @@
 package com.crowley.view;
 
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import com.crowley.controller.LoginService;
 import com.crowley.util.Constants;
@@ -24,9 +18,8 @@ public class LoginFrame extends JFrame {
 	private JLabel ipHint;
 	private JLabel authorInfo;
 	private LoginService service;
-	
-
 	private static final long serialVersionUID = -8325533949922000258L;
+	
 	public final int SCREEN_HEIGHT;
 	public final int SCREEN_WIDTH;
 	public final int FRAME_HEIGHT = 600;
@@ -59,15 +52,6 @@ public class LoginFrame extends JFrame {
 		this.setIPHint();
 		this.setIPAddress();
 		
-		//set background image
-		/*Container container = this.getContentPane();
-		BackgroundPanel bgp = new BackgroundPanel(new ImageIcon("res/cat.jpg").getImage());
-		bgp.setBounds(0, 0, 400, 300);
-		container.add(bgp);*/
-		/*container.setBackground(Color.CYAN);
-		container.setVisible(true);
-		*/
-		
 		//set author info on the bottom of JFrame
 		this.setAuthorInfo();
 		
@@ -90,7 +74,6 @@ public class LoginFrame extends JFrame {
 		ipHint.setLocation(0, 20);
 		ipHint.setFont(new Font("Monospaced", Font.BOLD, 20));
 		ipHint.setText(Constants.INPUT_IP_HINT);
-		ipHint.setForeground(new Color(195, 116, 226));
 		ipHint.setHorizontalAlignment(JLabel.CENTER);
 		this.add(ipHint);
 	}
@@ -113,24 +96,6 @@ public class LoginFrame extends JFrame {
 		authorInfo.setText(Constants.AUTHOR_INFO);
 		authorInfo.setHorizontalAlignment(JLabel.CENTER);
 		this.add(authorInfo);
-	}
-	
-	private final class BackgroundPanel extends JPanel {
-		
-		private static final long serialVersionUID = -4365243899790067991L;
-		Image image;
-		
-		public BackgroundPanel(Image image) {
-			this.image = image;
-			this.setOpaque(true);
-		}
-		
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-		}
-		
 	}
 	
 	private final class WindowCloseListener implements WindowListener {
