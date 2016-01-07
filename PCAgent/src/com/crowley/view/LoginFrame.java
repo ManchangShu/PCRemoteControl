@@ -60,10 +60,10 @@ public class LoginFrame extends JFrame {
 		this.setIPAddress();
 		
 		//set background image
-		Container container = this.getContentPane();
+		/*Container container = this.getContentPane();
 		BackgroundPanel bgp = new BackgroundPanel(new ImageIcon("res/cat.jpg").getImage());
 		bgp.setBounds(0, 0, 400, 300);
-		container.add(bgp);
+		container.add(bgp);*/
 		/*container.setBackground(Color.CYAN);
 		container.setVisible(true);
 		*/

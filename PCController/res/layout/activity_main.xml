@@ -1,8 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.crowley.pccontroller.MainActivity" >
 
     
@@ -14,4 +13,28 @@
         android:contentDescription="@string/app_name"
         android:text="@string/app_name"/>
 
-</LinearLayout>
+    <RelativeLayout 
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        
+        <ImageView 
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/login_top"/>
+        
+        <ImageView 
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="20dp"            
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/login_bottom"/>
+        
+    </RelativeLayout>
+    
+</FrameLayout>
