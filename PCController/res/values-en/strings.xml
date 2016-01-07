@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iMove</string>
+    <string name="or">OR</string>
+    <string name="ip_hint">Input IP here</string>
+    <string name="ip_wrong_hint">Input the correct IP address！</string>
+    <string name="remember_ip">Remember IP Address</string>
+    <string name="socket_timeout">Connect server failed!</string>
+    <string name="socket_login_successful">Login success！</string>
+    
+</resources>

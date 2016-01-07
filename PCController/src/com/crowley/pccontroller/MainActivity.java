@@ -6,16 +6,17 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.crowley.model.Constants;
-import com.crowley.model.NetworkModule;
 import com.crowley.model.MessageQueue;
+import com.crowley.model.NetworkModule;
 
 
 
 public class MainActivity extends Activity {
-	TextView moveArea;
+	//TextView moveArea;
+	ImageView bg;
 	PointF preCoordinate = new PointF();
 	PointF clickPressCoordinate = new PointF();
 	long clickPressTime;
@@ -25,8 +26,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		moveArea = (TextView) findViewById(R.id.move_area);;
-		moveArea.setOnTouchListener(new MyOnTouchListener());
+		//moveArea = (TextView) findViewById(R.id.move_area);
+		bg = (ImageView)findViewById(R.id.move_area);
+		bg.setOnTouchListener(new MyOnTouchListener());
 		
 	}
 	
@@ -61,14 +63,14 @@ public class MainActivity extends Activity {
 				int xOffset = (int) (curXCoordinate - preCoordinate.x);
 				int yOffset = (int) (curYCoordinate - preCoordinate.y);
 				//System.out.println(event.getX() + ", " + event.getY());
-				MainActivity.this.moveArea.append(xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
+				//MainActivity.this.moveArea.append(xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
 				MessageQueue.pushMessage(Constants.MESSAGE_TYPE_MOUSE_MOVE + Constants.MESSAGE_SEPARATOR + xOffset + Constants.MESSAGE_SEPARATOR + yOffset + "\n");
 				preCoordinate.x = event.getX();
 				preCoordinate.y = event.getY();
 				break;
 			case MotionEvent.ACTION_UP:
 				clickDuration = System.currentTimeMillis() - clickPressTime;
-				MainActivity.this.moveArea.append("click duration:" + clickDuration + "ms" + "\n");
+				//MainActivity.this.moveArea.append("click duration:" + clickDuration + "ms" + "\n");
 				if(clickDuration < Constants.MAX_LEFT_CLICK_TIME) {
 					MessageQueue.pushMessage("" + Constants.MESSAGE_TYPE_MOUSE_LEFT_CLICK);
 				}

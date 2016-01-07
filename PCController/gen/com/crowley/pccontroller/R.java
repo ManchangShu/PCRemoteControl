@@ -30,6 +30,7 @@ public final class R {
         public static final int login_scan=0x7f020005;
         public static final int login_selector=0x7f020006;
         public static final int long_input_background=0x7f020007;
+        public static final int main_activity_background=0x7f020008;
     }
     public static final class id {
         public static final int image_login=0x7f080003;

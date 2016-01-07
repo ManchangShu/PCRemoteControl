@@ -2,10 +2,6 @@ package com.crowley.pccontroller;
 
 import java.util.concurrent.TimeUnit;
 
-import com.crowley.model.Constants;
-import com.crowley.model.NetworkModule;
-import com.crowley.model.Persistence;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +12,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.crowley.model.Constants;
+import com.crowley.model.NetworkModule;
+import com.crowley.model.Persistence;
 
 public class LoginActivity extends Activity {
 	EditText etIPAddress;
