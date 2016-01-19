@@ -35,14 +35,16 @@ public final class R {
         public static final int main_activity_background=0x7f02000a;
     }
     public static final class id {
-        public static final int image_login=0x7f080003;
-        public static final int ip_address=0x7f080001;
+        public static final int image_login=0x7f080004;
+        public static final int ip_address=0x7f080002;
         public static final int move_area=0x7f080000;
-        public static final int remember_ip=0x7f080002;
+        public static final int preview_view=0x7f080001;
+        public static final int remember_ip=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int login=0x7f030001;
+        public static final int activity_scan=0x7f030001;
+        public static final int login=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f070000;

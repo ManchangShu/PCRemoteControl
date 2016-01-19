@@ -21,6 +21,7 @@ public class LoginActivity extends Activity {
 	EditText etIPAddress;
 	ImageView ivLogin;
 	CheckBox cbRemIP;
+	static final int CODE_SCAN_RESULT = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class LoginActivity extends Activity {
 		ivLogin = (ImageView) findViewById(R.id.image_login);
 		cbRemIP = (CheckBox) findViewById(R.id.remember_ip);
 		etIPAddress.setText(Persistence.getIP(this));
+		//TODO
+		//Add QR code scan : http://blog.csdn.net/xiaanming/article/details/10163203 
 	}
 	
 	public void login(View view) {
@@ -59,6 +62,20 @@ public class LoginActivity extends Activity {
 		
 	}
 	
+	public void scan(View view) {
+		Intent intent = new Intent(this, ScanActivity.class);
+		this.startActivityForResult(intent, CODE_SCAN_RESULT);
+	}
+	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == CODE_SCAN_RESULT && resultCode == RESULT_OK) {
+			etIPAddress.setText(data.getExtras().getString("qr_code"));
+		}
+	}
+
 	public void hideSoftKeyboard(View view) {
 		InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		if(manager.isActive()) {
