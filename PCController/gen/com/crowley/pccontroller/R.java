@@ -55,6 +55,7 @@ public final class R {
         public static final int ip_wrong_hint=0x7f050003;
         public static final int or=0x7f050001;
         public static final int remember_ip=0x7f050004;
+        public static final int scan_me=0x7f050007;
         public static final int socket_login_successful=0x7f050006;
         public static final int socket_timeout=0x7f050005;
     }

@@ -8,5 +8,6 @@
     <string name="remember_ip">记住输入的IP地址</string>
     <string name="socket_timeout">连接服务器失败！</string>
     <string name="socket_login_successful">登陆成功！</string>
+    <string name="scan_me">将二维码放入框内，即可自动扫描</string>
     
 </resources>

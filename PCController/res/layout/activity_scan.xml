@@ -10,4 +10,9 @@
         android:layout_height="match_parent"
         />
 
+    <com.crowley.pccontroller.ScanFrontView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+    
 </FrameLayout>

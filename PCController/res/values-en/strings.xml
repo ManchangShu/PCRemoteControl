@@ -8,5 +8,6 @@
     <string name="remember_ip">Remember IP Address</string>
     <string name="socket_timeout">Connect server failed!</string>
     <string name="socket_login_successful">Login success！</string>
+    <string name="scan_me">Put the QR Code in Rectangle</string>
     
 </resources>

@@ -90,6 +90,7 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 
 	@Override
 	protected void onDestroy() {
+		super.onDestroy();
 		if(camera != null) {
 			//cannot write in surfaceDestroyed(), because exception thrown: 
 			//onPreviewFrame() method would be invoked after camera released. 
@@ -99,7 +100,6 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 				camera = null;
 			}
 		}
-		super.onDestroy();
 	}
 
 
