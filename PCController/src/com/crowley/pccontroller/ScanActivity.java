@@ -9,10 +9,10 @@ import android.graphics.Point;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
@@ -91,6 +91,7 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		System.out.println("in destory() ...");
 		if(camera != null) {
 			//cannot write in surfaceDestroyed(), because exception thrown: 
 			//onPreviewFrame() method would be invoked after camera released. 
@@ -106,13 +107,19 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 	@Override
 	public void onPreviewFrame(byte[] data, Camera camera) {
 		/*PlanarYUVLuminanceSource
-		 * byte[] yuvData： 摄像头采集到的图像数据
+		 * byte[] yuvData： the image data captured by camera
           int dataWidth：PreviewSize.width
           int dataHeight：PreviewSize.height
-          int left,int top,int width,int height：在采集到的图像数据内，自定义一块区域进行 二维码解析
+          int left,int top,int width,int height：decode the specific area of the image data
           boolean reverseHorizontal：
 		 */
-		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, 640, 480, 100, 100, 300, 300, true);
+		Size size = camera.getParameters().getPreviewSize();
+		//System.out.println("preview size -> height:" + size.height + ", width:" + size.width);
+		int width = ScanFrontView.RECT_LEN * size.width / screenSize.y;
+		int height = ScanFrontView.RECT_LEN * size.height / screenSize.x;
+		int x = (size.width - width) / 2;
+		int y = (size.height - height) / 2;
+		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, 640, 480, x, y, width, height, true);
 		Reader reader = new QRCodeReader();
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 		try {
@@ -152,6 +159,7 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 			Intent intent = new Intent();
 			intent.putExtra("qr_code", "");
 			setResult(RESULT_CANCELED, intent);
+			System.out.println("in finish()...");
 			finish();
 			break;
 		case KeyEvent.KEYCODE_FOCUS:

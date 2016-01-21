@@ -17,7 +17,7 @@
         android:onClick="scan"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/login_scan"/>
+        android:src="@drawable/login_selector"/>
 
     
     <TextView

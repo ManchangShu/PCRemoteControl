@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.View;
@@ -20,7 +21,8 @@ public class ScanFrontView extends View {
 	int top;
 	int right;
 	int bottom;
-	final int RECT_LEN = 240;
+	public static final int RECT_LEN = 260;
+	final int OVAL_LEN = 8;
 	int yPos;
 	final int MIN_Y_POS;
 	final int MAX_Y_POS;
@@ -63,17 +65,20 @@ public class ScanFrontView extends View {
 		canvas.drawLine(left, top, left, bottom, paint);
 		canvas.drawLine(right, top, right, bottom, paint);
 		
-		//draw moving line
-		paint.setColor(Color.GREEN);
+		//draw moving oval
+		paint.setColor(Color.RED);
+		paint.setAlpha(120);
 		paint.setStrokeWidth(3);
 		updateYPos();
-		canvas.drawLine(left, yPos, right, yPos, paint);
+		canvas.drawOval(new RectF(left, yPos, right, yPos + OVAL_LEN), paint);
 		
 		//draw hint text
+		paint.setAlpha(220);
+		paint.setColor(Color.GREEN);
 		paint.setTextSize(22);
 		paint.setTextAlign(Align.CENTER);
 		canvas.drawText(this.getContext().getResources().getString(R.string.scan_me), display.getWidth() / 2, bottom + 50, paint);
-		
+		 
 		
 		invalidate();
 	}
@@ -81,7 +86,7 @@ public class ScanFrontView extends View {
 	private void updateYPos() {
 		if(goingDown) {
 			yPos += 3;
-			if(yPos >= MAX_Y_POS) {
+			if(yPos >= MAX_Y_POS - OVAL_LEN) {
 				goingDown = false;
 			}
 		} else {
