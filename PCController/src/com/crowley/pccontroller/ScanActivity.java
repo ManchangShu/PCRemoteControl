@@ -35,6 +35,10 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 	private Camera camera;
 	private Point screenSize = new Point();
 	private Point previewSize = new Point();
+	private int validX;
+	private int validY;
+	private int validHeight;
+	private int validWidth;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 		SurfaceHolder holder = surfaceview.getHolder();
 		holder.setKeepScreenOn(true);
 		holder.addCallback(this);
+		
 	}
 
 
@@ -66,12 +71,17 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 			CameraConfigurationUtils.findBestPreviewSizeValue(parameters, screenSize);
 			previewSize.x = parameters.getPreviewSize().width;
 			previewSize.y = parameters.getPreviewSize().height;
-			System.out.println(String.format("default size height:%d, width:%d",parameters.getPreviewSize().height, parameters.getPreviewSize().width));
+			System.out.println(String.format("default preview size height:%d, width:%d",parameters.getPreviewSize().height, parameters.getPreviewSize().width));
 			camera.setParameters(parameters);
 			camera.startPreview();
 			//auto focus per second
 			new Thread(new AutoFocusService()).start();
-			
+			//calculate analyze area
+			Size size = camera.getParameters().getPreviewSize();
+			validWidth = ScanFrontView.RECT_LEN * size.width / screenSize.y;
+			validHeight = ScanFrontView.RECT_LEN * size.height / screenSize.x;
+			validX = (size.width - validWidth) / 2;
+			validY = (size.height - validHeight) / 2;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,19 +117,14 @@ public class ScanActivity extends Activity  implements SurfaceHolder.Callback, C
 	@Override
 	public void onPreviewFrame(byte[] data, Camera camera) {
 		/*PlanarYUVLuminanceSource
-		 * byte[] yuvData£º the image data captured by camera
-          int dataWidth£ºPreviewSize.width
-          int dataHeight£ºPreviewSize.height
-          int left,int top,int width,int height£ºdecode the specific area of the image data
+		 * byte[] yuvData: the image data captured by camera
+          int dataWidth: PreviewSize.width
+          int dataHeight: PreviewSize.height
+          int left,int top,int width,int height: decode the specific area of the image data
           boolean reverseHorizontal£º
 		 */
-		Size size = camera.getParameters().getPreviewSize();
-		//System.out.println("preview size -> height:" + size.height + ", width:" + size.width);
-		int width = ScanFrontView.RECT_LEN * size.width / screenSize.y;
-		int height = ScanFrontView.RECT_LEN * size.height / screenSize.x;
-		int x = (size.width - width) / 2;
-		int y = (size.height - height) / 2;
-		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, 640, 480, x, y, width, height, true);
+		
+		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, previewSize.x, previewSize.y, validX, validY, validWidth, validHeight, true);
 		Reader reader = new QRCodeReader();
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 		try {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 @SuppressLint("DrawAllocation")
+@SuppressWarnings("deprecation")
 public class ScanFrontView extends View {
 	Display display;
 	int left;
@@ -27,6 +28,7 @@ public class ScanFrontView extends View {
 	final int MIN_Y_POS;
 	final int MAX_Y_POS;
 	boolean goingDown = true;
+
 
 	public ScanFrontView(Context context, AttributeSet attrs) {
 		super(context, attrs);
